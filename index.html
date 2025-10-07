@@ -1,69 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name's Website</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modern Minimal Web</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="header">
+    <div class="logo">M M W</div>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#works">Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <div class="site-wrapper">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="site-title">Your Name</h1>
-                <p class="site-subtitle">情報発信の拠点</p>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#profile" class="active">プロフィール</a></li>
-                    <li><a href="#posts">最新の投稿</a></li>
-                    <li><a href="#contact">連絡先</a></li>
-                </ul>
-            </nav>
-            <footer class="sidebar-footer">
-                <p>&copy; 2025 Your Name</p>
-            </footer>
-        </aside>
+  <section class="hero">
+    <h1>Welcome to <span>Modern Minimal Web</span></h1>
+    <p>Clean. Subtle. Stylish.</p>
+  </section>
 
-        <main class="main-content">
-            <section id="profile">
-                <h2>プロフィール</h2>
-                <p>
-                    ここにあなたの自己紹介を記述します。どのようなことに興味があり、どのような情報を発信していくのかを読者に伝えましょう。
-                    専門分野やこれまでの経験などを簡潔にまとめるのがおすすめです。
-                </p>
-            </section>
+  <section id="about" class="content fade">
+    <h2>About</h2>
+    <p>
+      これはHTML、CSS、JavaScriptのみで構成された、  
+      シンプルでかっこいいWebデザインのサンプルです。  
+      ミニマルなスタイルと軽いアニメーションで構成されています。
+    </p>
+  </section>
 
-            <section id="posts">
-                <h2>最新の投稿</h2>
-                <div class="post-list">
-                    <article class="post-item">
-                        <h3><a href="#">新しい記事のタイトル</a></h3>
-                        <time datetime="2025-10-08">2025年10月8日</time>
-                        <p>ここに記事の短い要約が入ります。読者が続きを読む気になるような魅力的な文章を心がけましょう...</p>
-                    </article>
-                    <article class="post-item">
-                        <h3><a href="#">2つ目の記事タイトル</a></h3>
-                        <time datetime="2025-10-01">2025年10月1日</time>
-                        <p>記事の要約です。リンクをクリックすると記事全体が読めるようになります...</p>
-                    </article>
-                    <article class="post-item">
-                        <h3><a href="#">過去の記事タイトル</a></h3>
-                        <time datetime="2025-09-25">2025年9月25日</time>
-                        <p>記事の要約です...</p>
-                    </article>
-                </div>
-            </section>
-
-            <section id="contact">
-                <h2>連絡先</h2>
-                <p>ご意見、ご感想、お問い合わせはこちらから。</p>
-                <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-                <p><strong>X (Twitter):</strong> <a href="#" target="_blank">@your_account</a></p>
-            </section>
-        </main>
+  <section id="works" class="content fade">
+    <h2>Works</h2>
+    <div class="cards">
+      <div class="card">Design</div>
+      <div class="card">Development</div>
+      <div class="card">Branding</div>
     </div>
+  </section>
 
+  <section id="contact" class="content fade">
+    <h2>Contact</h2>
+    <p>ご質問やご依頼は、下記メールまでご連絡ください。</p>
+    <a href="mailto:info@example.com" class="btn">Send Mail</a>
+  </section>
+
+  <footer class="footer">
+    <p>© 2025 Modern Minimal Web</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
