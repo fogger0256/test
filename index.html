@@ -46,19 +46,26 @@
 </head>
 <body>
   <h1>定期試験まで</h1>
-<div class="countdown">
+<div class="countdown" id="countdown">
   <span class="text">あと</span>
-  <span class="days" id="countdown">--日--時間--分--秒</span>
-  <span class="text"></span>
+  <!-- JavaScriptでここに数字と単位が挿入される -->
 </div>
-<script>
+  <script>
   function updateCountdown() {
     const targetDate = new Date("2025-11-17T00:00:00");
     const now = new Date();
     const diff = targetDate - now;
 
+    const container = document.getElementById("countdown");
+
     if (diff <= 0) {
-      document.getElementById("countdown").textContent = "0日0時間0分0秒";
+      container.innerHTML = `
+        <span class="text">あと</span>
+        <span class="days">0</span><span class="text">日</span>
+        <span class="days">0</span><span class="text">時間</span>
+        <span class="days">0</span><span class="text">分</span>
+        <span class="days">0</span><span class="text">秒</span>
+      `;
       return;
     }
 
@@ -67,12 +74,17 @@
     const minutes = Math.floor((diff / (1000 * 60)) % 60);
     const seconds = Math.floor((diff / 1000) % 60);
 
-    document.getElementById("countdown").textContent =
-      `${days}日${hours}時間${minutes}分${seconds}秒`;
+    container.innerHTML = `
+      <span class="text">あと</span>
+      <span class="days">${days}</span><span class="text">日</span>
+      <span class="days">${hours}</span><span class="text">時間</span>
+      <span class="days">${minutes}</span><span class="text">分</span>
+      <span class="days">${seconds}</span><span class="text">秒</span>
+    `;
   }
 
   updateCountdown();
-  setInterval(updateCountdown, 1000); // 毎秒更新
+  setInterval(updateCountdown, 1000);
 </script>
 </body>
 </html>
