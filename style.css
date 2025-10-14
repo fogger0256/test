@@ -1,146 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
-:root {
-  --bg: #0f0f0f;
-  --text: #f5f5f5;
-  --accent: #00bcd4;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.8;
-  overflow-x: hidden;
+    /* 背景の色は#191970 (Midnight Blue) */
+    background-color: #191970;
+    /* 全体を画面いっぱいに広げる */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    /* コンテンツを中央に配置するためのFlexbox設定 */
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center;     /* 垂直方向の中央揃え */
+    font-family: 'Arial', sans-serif; /* フォントを設定 */
+    text-align: center; /* テキストを中央揃え */
 }
 
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: rgba(15, 15, 15, 0.85);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 3rem;
-  z-index: 100;
-  backdrop-filter: blur(10px);
+#container {
+    /* 必要に応じてコンテナの最大幅を設定しても良い */
+    /* max-width: 800px; */
 }
 
-.logo {
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--accent);
+/* タイトル「定期試験まで」のスタイル */
+#title {
+    /* 文字サイズは32 */
+    font-size: 32px;
+    /* 太め */
+    font-weight: bold;
+    /* 色は#f0f8ff (Alice Blue) */
+    color: #f0f8ff;
+    margin-bottom: 20px; /* カウントダウンとの間にスペース */
 }
 
-.nav a {
-  color: var(--text);
-  text-decoration: none;
-  margin-left: 2rem;
-  transition: color 0.3s;
+/* カウントダウン全体（あと...日）のスタイル */
+#countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 画面中央に配置はbodyのFlexbox設定で実現済み */
 }
 
-.nav a:hover {
-  color: var(--accent);
+/* 「あと」「日」の文字のスタイル */
+.label {
+    /* 文字サイズは32（タイトルと合わせる） */
+    font-size: 32px;
+    /* 太め */
+    font-weight: bold;
+    /* 色は#f0f8ff (Alice Blue) */
+    color: #f0f8ff;
+    margin: 0 10px; /* 日付との間に少しスペース */
 }
 
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.hero span {
-  color: var(--accent);
-}
-
-.hero p {
-  margin-top: 1rem;
-  font-weight: 300;
-  opacity: 0.8;
-}
-
-.content {
-  max-width: 800px;
-  margin: 10rem auto;
-  padding: 0 1.5rem;
-  text-align: center;
-}
-
-.content h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--accent);
-}
-
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.card {
-  background: #1b1b1b;
-  border: 1px solid #333;
-  padding: 2rem 3rem;
-  border-radius: 8px;
-  transition: transform 0.3s, border-color 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-}
-
-.btn {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.8rem 2rem;
-  background: var(--accent);
-  color: #000;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: 500;
-  transition: opacity 0.3s;
-}
-
-.btn:hover {
-  opacity: 0.8;
-}
-
-.footer {
-  text-align: center;
-  padding: 2rem 0;
-  background: #111;
-  font-size: 0.9rem;
-  opacity: 0.7;
-}
-
-/* フェードイン */
-.fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.fade.visible {
-  opacity: 1;
-  transform: translateY(0);
+/* 残りの日付の文字（数字）のスタイル */
+#days {
+    /* 色#7fffd4 (Aquamarine) */
+    color: #7fffd4;
+    /* サイズ128 */
+    font-size: 128px;
+    /* 太め */
+    font-weight: bolder;
+    /* 中央配置は#countdownのFlexboxで実現済み */
 }
