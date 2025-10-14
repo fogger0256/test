@@ -1,54 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Minimal Web</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定期試験までカウントダウン</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="logo">M M W</div>
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#works">Works</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+    <div id="container">
+        <h1 id="title">定期試験まで</h1>
 
-  <section class="hero">
-    <h1>Welcome to <span>Modern Minimal Web</span></h1>
-    <p>Clean. Subtle. Stylish.</p>
-  </section>
-
-  <section id="about" class="content fade">
-    <h2>About</h2>
-    <p>
-      これはHTML、CSS、JavaScriptのみで構成された、  
-      シンプルでかっこいいWebデザインのサンプルです。  
-      ミニマルなスタイルと軽いアニメーションで構成されています。
-    </p>
-  </section>
-
-  <section id="works" class="content fade">
-    <h2>Works</h2>
-    <div class="cards">
-      <div class="card">Design</div>
-      <div class="card">Development</div>
-      <div class="card">Branding</div>
+        <div id="countdown">
+            <span class="label">あと</span>
+            <span id="days">0</span>
+            <span class="label">日</span>
+        </div>
     </div>
-  </section>
 
-  <section id="contact" class="content fade">
-    <h2>Contact</h2>
-    <p>ご質問やご依頼は、下記メールまでご連絡ください。</p>
-    <a href="mailto:info@example.com" class="btn">Send Mail</a>
-  </section>
-
-  <footer class="footer">
-    <p>© 2025 Modern Minimal Web</p>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
