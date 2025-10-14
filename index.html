@@ -46,23 +46,33 @@
 </head>
 <body>
   <h1>定期試験まで</h1>
-  <div class="countdown">
-    <span class="text">あと</span>
-    <span class="days" id="days">--</span>
-    <span class="text">日</span>
-  </div>
+<div class="countdown">
+  <span class="text">あと</span>
+  <span class="days" id="countdown">--日--時間--分--秒</span>
+  <span class="text"></span>
+</div>
+<script>
+  function updateCountdown() {
+    const targetDate = new Date("2025-11-17T00:00:00");
+    const now = new Date();
+    const diff = targetDate - now;
 
-  <script>
-    function updateCountdown() {
-      const targetDate = new Date("2025-11-17T00:00:00");
-      const now = new Date();
-      const diff = targetDate - now;
-      const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("days").textContent = daysLeft > 0 ? daysLeft : 0;
+    if (diff <= 0) {
+      document.getElementById("countdown").textContent = "0日0時間0分0秒";
+      return;
     }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60); // 1時間ごとに更新
-  </script>
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").textContent =
+      `${days}日${hours}時間${minutes}分${seconds}秒`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000); // 毎秒更新
+</script>
 </body>
 </html>
