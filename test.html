@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>カウントダウンタイマー</title>
 
-  <!-- フォント（任意） -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Noto+Sans+JP:wght@300;700&display=swap" rel="stylesheet">
-　<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
-  
   <style>
     :root{
       --bg: #1D1E30;
@@ -20,7 +16,7 @@
       margin:0;
       background:var(--bg);
       color: #ffffff;
-      font-family: "Noto Sans JP", "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: "DIN", "Helvetica Neue", Helvetica, Arial, sans-serif;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
     }
@@ -35,7 +31,6 @@
       gap:32px;
     }
 
-    /* ヘッダー */
     .title {
       text-align:center;
       color:#fff;
@@ -45,7 +40,6 @@
       margin-top:8px;
     }
 
-    /* カウントダウン領域 */
     .count-area {
       display:flex;
       align-items:flex-end;
@@ -61,15 +55,15 @@
       text-align:center;
     }
 
-  .digits {
-  font-family: "DIN", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 120px;
-  line-height: 1;
-  color: var(--accent);
-  letter-spacing: 6px;
-  margin: 0 0 8px 0;
-}
+    .digits {
+      font-family: "DIN", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight:700;
+      font-size:120px;
+      line-height:1;
+      color:var(--accent);
+      letter-spacing:6px;
+      margin:0 0 8px 0;
+    }
 
     .label {
       font-size:20px;
@@ -79,7 +73,6 @@
       margin-top:6px;
     }
 
-    /* 下線 */
     .divider {
       height:6px;
       background:var(--accent);
@@ -88,36 +81,30 @@
       border-radius:4px;
     }
 
-    /* 左の縦並びテキスト */
-    .left-texts {
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      width:360px;
-      padding-left:8px;
-      box-sizing:border-box;
-    }
-    .left-texts .item {
-      font-size:32px;
-      font-weight:700;
-      color:#fff;
-    }
-    .left-texts .item.first {
-      color:var(--accent);
+    /* ▼ 4×4 表のスタイル ▼ */
+    table.info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      text-align: center;
     }
 
-    /* レスポンシブ微調整 */
-    @media (max-width:1000px){
-      .digits { font-size:88px; }
-      .title { font-size:30px; }
-      .left-texts { width:100%; order:2; margin-top:10px; }
-      .count-area { order:1; }
+    table.info-table td {
+      padding: 16px;
+      border: 1px solid #2a2b45;
+      font-size: 22px;
     }
-    @media (max-width:600px){
-      .digits { font-size:56px; }
+
+    /* 1列目の文字色を変更 */
+    table.info-table td:first-child {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (max-width:800px){
+      .digits { font-size:80px; }
       .label { font-size:16px; }
-      .time-block { min-width:120px; }
-      .left-texts .item { font-size:24px; }
+      table.info-table td { font-size:18px; padding:10px; }
     }
   </style>
 </head>
@@ -125,47 +112,48 @@
   <div class="wrap">
     <div class="title">定期試験まで</div>
 
-    <div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">
-      <!-- カウントダウン本体（中央） -->
-      <div style="flex:1 1 65%;">
-        <div class="count-area" aria-hidden="false">
-          <div class="time-block">
-            <div id="days" class="digits">--</div>
-            <div class="label">DAYS</div>
-          </div>
-          <div class="time-block">
-            <div id="hours" class="digits">--</div>
-            <div class="label">HOURS</div>
-          </div>
-          <div class="time-block">
-            <div id="minutes" class="digits">--</div>
-            <div class="label">MINUTES</div>
-          </div>
-          <div class="time-block">
-            <div id="seconds" class="digits">--</div>
-            <div class="label">SECONDS</div>
-          </div>
-        </div>
-
-        <div class="divider" role="presentation"></div>
+    <div class="count-area">
+      <div class="time-block">
+        <div id="days" class="digits">--</div>
+        <div class="label">DAYS</div>
       </div>
-
-      <!-- 左側の説明テキスト -->
-      <div class="left-texts" aria-hidden="true">
-        <div class="item first">1日目</div>
-        <div class="item">古典</div>
-        <div class="item">数学Ⅱ</div>
-        <div class="item">物理</div>
+      <div class="time-block">
+        <div id="hours" class="digits">--</div>
+        <div class="label">HOURS</div>
+      </div>
+      <div class="time-block">
+        <div id="minutes" class="digits">--</div>
+        <div class="label">MINUTES</div>
+      </div>
+      <div class="time-block">
+        <div id="seconds" class="digits">--</div>
+        <div class="label">SECONDS</div>
       </div>
     </div>
+
+    <div class="divider"></div>
+
+    <!-- ▼ 4×4 表 ▼ -->
+    <table class="info-table">
+      <tr>
+        <td>文字</td><td>文字</td><td>文字</td><td>文字</td>
+      </tr>
+      <tr>
+        <td>文字</td><td>文字</td><td>文字</td><td>文字</td>
+      </tr>
+      <tr>
+        <td>文字</td><td>文字</td><td>文字</td><td>文字</td>
+      </tr>
+      <tr>
+        <td>文字</td><td>文字</td><td>文字</td><td>文字</td>
+      </tr>
+    </table>
   </div>
 
   <script>
-    // --- ここを変更して目標日時を設定してください（例: YYYY-MM-DDTHH:MM:SS）---
-    // タイムゾーンはブラウザのローカルタイムに依存します。
-    const targetDate = new Date("2025-11-20T00:00:00");
+    // 目標日時を設定（例: 2026年1月20日 9:00）
+    const targetDate = new Date("2026-01-20T09:00:00");
 
-    // DOM 要素
     const elDays = document.getElementById("days");
     const elHours = document.getElementById("hours");
     const elMinutes = document.getElementById("minutes");
@@ -173,34 +161,23 @@
 
     function updateCountdown() {
       const now = new Date();
-      let diff = Math.max(0, targetDate - now); // ミリ秒差（負にならないようにする）
-
+      const diff = Math.max(0, targetDate - now);
       const sec = Math.floor(diff / 1000);
       const days = Math.floor(sec / 86400);
       const hours = Math.floor((sec % 86400) / 3600);
       const minutes = Math.floor((sec % 3600) / 60);
       const seconds = Math.floor(sec % 60);
 
-      // 表示（2桁に揃える。ただし日数は必要に応じて3桁表示も可）
       elDays.textContent = String(days).padStart(2, "0");
       elHours.textContent = String(hours).padStart(2, "0");
       elMinutes.textContent = String(minutes).padStart(2, "0");
       elSeconds.textContent = String(seconds).padStart(2, "0");
 
-      // 終了時の処理（任意）
-      if (diff <= 0) {
-        // カウントダウン終了
-        clearInterval(timerId);
-        // ここに終了後の振る舞いを追加できます（例: テキストを表示）
-        // document.querySelector('.title').textContent = '試験開始！';
-      }
+      if (diff <= 0) clearInterval(timerId);
     }
 
-    // 初回表示
     updateCountdown();
-    // 1秒ごとに更新
     const timerId = setInterval(updateCountdown, 1000);
-
   </script>
 </body>
 </html>
