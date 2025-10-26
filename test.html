@@ -1,32 +1,204 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>文字の点滅（JS制御）</title>
-<style>
-#text {
-  font-size: 2em;
-  font-weight: bold;
-}
-</style>
-</head>
-<body>
-  <div id="text">点滅する文字</div>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>カウントダウンタイマー</title>
 
-  <script>
-    const text = document.getElementById("text");
+  <!-- フォント（任意） -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
-    function blink() {
-      text.style.visibility = "visible";
-      setTimeout(() => {
-        text.style.visibility = "hidden";
-      }, 1000); // 1秒後に非表示
-
-      // 1秒表示 + 0.25秒非表示 = 1.25秒周期で再実行
-      setTimeout(blink, 1250);
+  <style>
+    :root{
+      --bg: #1D1E30;
+      --accent: #06E199; /* ミントグリーン */
+      --muted: #dfe6ee;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color: #ffffff;
+      font-family: "Noto Sans JP", "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    blink(); // 初回起動
+    .wrap{
+      max-width:1200px;
+      margin: 40px auto;
+      padding: 40px 48px;
+      box-sizing: border-box;
+      display:flex;
+      flex-direction:column;
+      gap:32px;
+    }
+
+    /* ヘッダー */
+    .title {
+      text-align:center;
+      color:#fff;
+      font-size:36px;
+      font-weight:500;
+      letter-spacing:2px;
+      margin-top:8px;
+    }
+
+    /* カウントダウン領域 */
+    .count-area {
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 8px 20px 0 20px;
+      flex-wrap:wrap;
+    }
+
+    .time-block {
+      flex:1 1 18%;
+      min-width:170px;
+      text-align:center;
+    }
+
+    .digits {
+      font-family: "Montserrat", sans-serif;
+      font-weight:800;
+      font-size:120px;
+      line-height:1;
+      color:var(--accent);
+      letter-spacing:6px;
+      margin:0 0 8px 0;
+    }
+
+    .label {
+      font-size:20px;
+      font-weight:700;
+      color:#ffffff;
+      letter-spacing:1.5px;
+      margin-top:6px;
+    }
+
+    /* 下線 */
+    .divider {
+      height:6px;
+      background:var(--accent);
+      margin: 10px 0 30px 0;
+      width:100%;
+      border-radius:4px;
+    }
+
+    /* 左の縦並びテキスト */
+    .left-texts {
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      width:360px;
+      padding-left:8px;
+      box-sizing:border-box;
+    }
+    .left-texts .item {
+      font-size:32px;
+      font-weight:700;
+      color:#fff;
+    }
+    .left-texts .item.first {
+      color:var(--accent);
+    }
+
+    /* レスポンシブ微調整 */
+    @media (max-width:1000px){
+      .digits { font-size:88px; }
+      .title { font-size:30px; }
+      .left-texts { width:100%; order:2; margin-top:10px; }
+      .count-area { order:1; }
+    }
+    @media (max-width:600px){
+      .digits { font-size:56px; }
+      .label { font-size:16px; }
+      .time-block { min-width:120px; }
+      .left-texts .item { font-size:24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">定期試験まで</div>
+
+    <div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap;">
+      <!-- カウントダウン本体（中央） -->
+      <div style="flex:1 1 65%;">
+        <div class="count-area" aria-hidden="false">
+          <div class="time-block">
+            <div id="days" class="digits">--</div>
+            <div class="label">DAYS</div>
+          </div>
+          <div class="time-block">
+            <div id="hours" class="digits">--</div>
+            <div class="label">HOURS</div>
+          </div>
+          <div class="time-block">
+            <div id="minutes" class="digits">--</div>
+            <div class="label">MINUTES</div>
+          </div>
+          <div class="time-block">
+            <div id="seconds" class="digits">--</div>
+            <div class="label">SECONDS</div>
+          </div>
+        </div>
+
+        <div class="divider" role="presentation"></div>
+      </div>
+
+      <!-- 左側の説明テキスト -->
+      <div class="left-texts" aria-hidden="true">
+        <div class="item first">文字</div>
+        <div class="item">文字</div>
+        <div class="item">文字</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- ここを変更して目標日時を設定してください（例: YYYY-MM-DDTHH:MM:SS）---
+    // タイムゾーンはブラウザのローカルタイムに依存します。
+    const targetDate = new Date("2026-01-20T09:00:00");
+
+    // DOM 要素
+    const elDays = document.getElementById("days");
+    const elHours = document.getElementById("hours");
+    const elMinutes = document.getElementById("minutes");
+    const elSeconds = document.getElementById("seconds");
+
+    function updateCountdown() {
+      const now = new Date();
+      let diff = Math.max(0, targetDate - now); // ミリ秒差（負にならないようにする）
+
+      const sec = Math.floor(diff / 1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const minutes = Math.floor((sec % 3600) / 60);
+      const seconds = Math.floor(sec % 60);
+
+      // 表示（2桁に揃える。ただし日数は必要に応じて3桁表示も可）
+      elDays.textContent = String(days).padStart(2, "0");
+      elHours.textContent = String(hours).padStart(2, "0");
+      elMinutes.textContent = String(minutes).padStart(2, "0");
+      elSeconds.textContent = String(seconds).padStart(2, "0");
+
+      // 終了時の処理（任意）
+      if (diff <= 0) {
+        // カウントダウン終了
+        clearInterval(timerId);
+        // ここに終了後の振る舞いを追加できます（例: テキストを表示）
+        // document.querySelector('.title').textContent = '試験開始！';
+      }
+    }
+
+    // 初回表示
+    updateCountdown();
+    // 1秒ごとに更新
+    const timerId = setInterval(updateCountdown, 1000);
+
   </script>
 </body>
 </html>
