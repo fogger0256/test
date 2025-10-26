@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>文字の点滅（JS制御）</title>
+<style>
+#text {
+  font-size: 2em;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+  <div id="text">点滅する文字</div>
+
+  <script>
+    const text = document.getElementById("text");
+
+    function blink() {
+      text.style.visibility = "visible";
+      setTimeout(() => {
+        text.style.visibility = "hidden";
+      }, 1000); // 1秒後に非表示
+
+      // 1秒表示 + 0.25秒非表示 = 1.25秒周期で再実行
+      setTimeout(blink, 1250);
+    }
+
+    blink(); // 初回起動
+  </script>
+</body>
+</html>
